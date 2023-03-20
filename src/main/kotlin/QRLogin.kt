@@ -15,7 +15,6 @@ import net.mamoe.mirai.console.util.SemVersion
 import net.mamoe.mirai.console.util.scopeWith
 import net.mamoe.mirai.message.nextMessageOrNull
 import net.mamoe.mirai.utils.BotConfiguration
-import net.mamoe.mirai.utils.secondsToMillis
 
 object QRLogin : KotlinPlugin(
     JvmPluginDescription(
@@ -78,7 +77,7 @@ object LoginCommand : SimpleCommand(
                     "Login failed: ${throwable.localizedMessage ?: throwable.message ?: throwable.toString()}" +
                             if (this is CommandSenderOnMessage<*>) {
                                 MiraiConsole.launch(CoroutineName("stacktrace delayer from Login")) {
-                                    fromEvent.nextMessageOrNull(60.secondsToMillis) { it.message.contentEquals("stacktrace") }
+                                    fromEvent.nextMessageOrNull(60 * 1000L) { it.message.contentEquals("stacktrace") }
                                 }
                                 "\n 1 分钟内发送 stacktrace 以获取堆栈信息"
                             } else ""
