@@ -42,7 +42,7 @@ object QRAutoLoginConfig : AutoSavePluginConfig("AutoLogin") {
             ConfigurationKey.protocol to "MACOS",
             ConfigurationKey.device to "device.json",
             ConfigurationKey.enable to true,
-            ConfigurationKey.heartbeatStrategy to "STAB_HB"
+            ConfigurationKey.heartbeatStrategy to "STAT_HB"
         ),
     ) {
         @Serializable
