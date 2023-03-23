@@ -69,6 +69,7 @@ object LoginCommand : SimpleCommand(
             MiraiConsole.addBot(id, auth) {
                 this.protocol = BotConfiguration.MiraiProtocol.MACOS
                 setup(id, protocol)
+                setupQRCodeLoginSolver()
             }.also { doLogin(it) }
         }.fold(
             onSuccess = { scopeWith(ConsoleCommandSender).sendMessage("${it.nick} ($id) Login successful") },

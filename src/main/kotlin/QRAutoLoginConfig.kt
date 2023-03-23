@@ -123,6 +123,7 @@ object QRAutoLoginConfig : AutoSavePluginConfig("AutoLogin") {
                         fileBasedDeviceInfo(device.toString())
                     }
 
+                    setupQRCodeLoginSolver()
                     mainLogger.info("Auto-login ${account.account}, protocol: ${this.protocol}, heartbeatStrategy: ${this.heartbeatStrategy}")
                 }
 
