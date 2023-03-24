@@ -3,10 +3,12 @@ package top.mrxiaom.qrlogin
 import net.mamoe.mirai.Bot
 import net.mamoe.mirai.auth.QRCodeLoginListener
 import net.mamoe.mirai.utils.*
+import java.awt.Desktop
 
 class QRLoginSolver(
     private val parentSolver: LoginSolver
 ): LoginSolver() {
+    val enable = Desktop.isDesktopSupported()
     override suspend fun onSolvePicCaptcha(bot: Bot, data: ByteArray): String? {
         return parentSolver.onSolvePicCaptcha(bot, data)
     }
@@ -19,7 +21,9 @@ class QRLoginSolver(
         get() = parentSolver.isSliderCaptchaSupported
 
     override fun createQRCodeLoginListener(bot: Bot): QRCodeLoginListener {
-        // TODO 窗口显示二维码
+        if (enable) {
+            return SwingQRLoginListener()
+        }
         return parentSolver.createQRCodeLoginListener(bot)
     }
 
