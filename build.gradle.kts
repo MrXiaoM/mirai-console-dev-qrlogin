@@ -10,6 +10,7 @@ group = "top.mrxiaom"
 version = "0.1.1"
 
 repositories {
+    maven("https://repo.huaweicloud.com/repository/maven/")
     mavenCentral()
     maven("https://repo.mirai.mamoe.net/snapshots")
 }
