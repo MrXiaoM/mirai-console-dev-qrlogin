@@ -48,7 +48,7 @@ object QRLogin : KotlinPlugin(
  */
 object LoginCommand : SimpleCommand(
     QRLogin, "qrLogin",
-    description = "扫码登录，协议可用 ANDROID_WATCH 和 MACOS，默认 MACOS",
+    description = "扫码登录，协议可用 ANDROID_WATCH 和 MACOS，默认 ANDROID_WATCH",
 ) {
     private suspend fun doLogin(bot: Bot) {
         kotlin.runCatching {
@@ -67,7 +67,7 @@ object LoginCommand : SimpleCommand(
         kotlin.runCatching {
             val auth = BotAuthorization.byQRCode()
             MiraiConsole.addBot(id, auth) {
-                this.protocol = BotConfiguration.MiraiProtocol.MACOS
+                this.protocol = BotConfiguration.MiraiProtocol.ANDROID_WATCH
                 setup(id, protocol)
                 setupQRCodeLoginSolver()
             }.also { doLogin(it) }

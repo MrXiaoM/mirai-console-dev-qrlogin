@@ -39,7 +39,7 @@ object QRAutoLoginConfig : AutoSavePluginConfig("AutoLogin") {
         """
         )
         val configuration: Map<ConfigurationKey, @Serializable(with = YamlDynamicSerializer::class) Any> = mapOf(
-            ConfigurationKey.protocol to "MACOS",
+            ConfigurationKey.protocol to "ANDROID_WATCH",
             ConfigurationKey.device to "device.json",
             ConfigurationKey.enable to true,
             ConfigurationKey.heartbeatStrategy to "STAT_HB"
@@ -71,7 +71,7 @@ object QRAutoLoginConfig : AutoSavePluginConfig("AutoLogin") {
             Account(
                 account = "123456",
                 configuration = mapOf(
-                    Account.ConfigurationKey.protocol to "MACOS",
+                    Account.ConfigurationKey.protocol to "ANDRID_WATCH",
                     Account.ConfigurationKey.device to "device.json",
                     Account.ConfigurationKey.enable to true,
                     Account.ConfigurationKey.heartbeatStrategy to "STAT_HB"
@@ -98,7 +98,7 @@ object QRAutoLoginConfig : AutoSavePluginConfig("AutoLogin") {
                 }
                 if (id == 123456L) continue
                 fun BotConfiguration.configBot() {
-                    this.protocol = BotConfiguration.MiraiProtocol.MACOS
+                    this.protocol = BotConfiguration.MiraiProtocol.ANDROID_WATCH
                     account.configuration[Account.ConfigurationKey.protocol]?.let { protocol ->
                         this.protocol = runCatching {
                             BotConfiguration.MiraiProtocol.valueOf(protocol.toString())
