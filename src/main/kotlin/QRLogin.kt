@@ -26,9 +26,8 @@ object QRLogin : KotlinPlugin(
     }
 ) {
     private val enable by lazy {
-        if (SemVersion.parseRangeRequirement("<= 2.14.0").test(MiraiConsole.version)
-            || (MiraiConsole.version.identifier ?: "").run { !contains("M") && !contains("dev") }) {
-            logger.warning("本插件仅在 2.15.0 或以上工作，且在正式版或先行发布版(RC)中弃用")
+        logger.warning("本插件仅在 2.15.0 或以上工作，且在正式版或先行发布版(RC)中可能无法使用")
+        if (SemVersion.parseRangeRequirement("<= 2.14.0").test(MiraiConsole.version)) {
             return@lazy false
         }
         return@lazy true
