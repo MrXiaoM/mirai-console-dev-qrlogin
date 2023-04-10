@@ -7,7 +7,7 @@ plugins {
 }
 
 group = "top.mrxiaom"
-version = "0.1.1"
+version = "0.1.3"
 
 repositories {
     maven("https://repo.huaweicloud.com/repository/maven/")
