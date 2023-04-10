@@ -2,6 +2,9 @@
 
 mirai-console 的扫码登录命令 临时实现。
 
+[![Releases](https://img.shields.io/github/downloads/MrXiaoM/mirai-console-dev-qrlogin/total?label=%E4%B8%8B%E8%BD%BD%E9%87%8F&logo=github)](https://github.com/MrXiaoM/mirai-console-dev-qrlogin/releases)
+[![Stars](https://img.shields.io/github/stars/MrXiaoM/mirai-console-dev-qrlogin?label=%E6%A0%87%E6%98%9F&logo=github)](https://github.com/MrXiaoM/mirai-console-dev-qrlogin/stargazers)
+
 ## 注意事项
 
 * 扫码登录不一定能够解决风控问题，该报 235 可能还得报 235，因人而异。
@@ -16,7 +19,7 @@ mirai-console 的扫码登录命令 临时实现。
 
 ## 用法
 
-在 mirai 版本大于或等于 `2.15.0-dev-27` 的控制台中安装该插件，~~如果你不会下载开发版本，可在本文末尾加群下载一键包。~~你可以使用最近的一个测试版本 `2.15.0-M1`
+在 mirai 版本大于或等于 `2.15.0-dev-27` 的控制台中安装该插件，~~如果你不会下载开发版本，可在本文末尾加群下载一键包~~。你也可以使用最近的一个测试版本 `2.15.0-M1`
 
 安装插件后启动，在控制台输入命令
 ```
@@ -29,7 +32,7 @@ qrlogin <QQ号>
 ## 帮助命令
 和 mirai-console 自带命令基本一致，只是命令前缀多了 `qr`，选项少了密码。
 ```
-/qrLogin <qq> [protocol]    # 扫码登录，协议可用 ANDROID_WATCH 和 MACOS，默认 MACOS
+/qrLogin <qq> [protocol]    # 扫码登录，协议可用 ANDROID_WATCH 和 MACOS，默认 ANDROID_WATCH
 /qrAutoLogin add <account>    # 添加(扫码登录)自动登录
 /qrAutoLogin clear    # 清除(扫码登录)自动登录的所有配置
 /qrAutoLogin list    # 查看(扫码登录)自动登录账号列表
@@ -43,6 +46,6 @@ qrlogin <QQ号>
 ./gradlew buildPlugin
 ```
 
-## 2.15.0-dev-27 扫码登录版本下载
+## 扫码登录版本一键包下载
 
 加入群 1047497524 在群文件 `Mirai 一键包` 文件夹下载。
