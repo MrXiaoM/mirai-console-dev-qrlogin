@@ -9,14 +9,15 @@ import java.awt.Dimension
 import java.awt.event.WindowAdapter
 import java.awt.event.WindowEvent
 import java.io.File
-import javax.sound.midi.SysexMessage
 import javax.swing.ImageIcon
 import javax.swing.JFrame
 import javax.swing.JLabel
-import javax.swing.JWindow
 
-class SwingQRLoginListener : QRCodeLoginListener {
-    val logger = MiraiLogger.Factory.create(this::class, "QRLoginSolver")
+class SwingQRLoginListener(
+    val solver: QRLoginSolver
+) : QRCodeLoginListener {
+    private val logger: MiraiLogger
+        get() = solver.logger
     private var window: JFrame
     private var image: JLabel
     private var tempBot: Bot? = null

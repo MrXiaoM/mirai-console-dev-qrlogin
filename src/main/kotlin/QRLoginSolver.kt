@@ -8,6 +8,7 @@ import java.awt.Desktop
 class QRLoginSolver(
     private val parentSolver: LoginSolver
 ): LoginSolver() {
+    val logger = MiraiLogger.Factory.create(this::class, "QRLoginSolver")
     val enable = kotlin.runCatching { Desktop.isDesktopSupported() }.getOrElse { false }
     override suspend fun onSolvePicCaptcha(bot: Bot, data: ByteArray): String? {
         return parentSolver.onSolvePicCaptcha(bot, data)
@@ -22,8 +23,9 @@ class QRLoginSolver(
 
     override fun createQRCodeLoginListener(bot: Bot): QRCodeLoginListener {
         if (enable) {
-            return SwingQRLoginListener()
+            return SwingQRLoginListener(this)
         }
+
         return parentSolver.createQRCodeLoginListener(bot)
     }
 
