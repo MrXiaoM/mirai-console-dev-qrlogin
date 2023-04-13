@@ -13,11 +13,9 @@ import javax.swing.ImageIcon
 import javax.swing.JFrame
 import javax.swing.JLabel
 
-class SwingQRLoginListener(
-    val solver: QRLoginSolver
-) : QRCodeLoginListener {
+class SwingQRLoginListener : QRCodeLoginListener {
     private val logger: MiraiLogger
-        get() = solver.logger
+        get() = QRLoginSolver.logger
     private var window: JFrame
     private var image: JLabel
     private var tempBot: Bot? = null

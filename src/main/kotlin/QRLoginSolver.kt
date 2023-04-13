@@ -8,8 +8,9 @@ import java.awt.Desktop
 class QRLoginSolver(
     private val parentSolver: LoginSolver
 ): LoginSolver() {
-    val logger = MiraiLogger.Factory.create(this::class, "QRLoginSolver")
-    val enable = kotlin.runCatching { Desktop.isDesktopSupported() }.getOrElse { false }
+    companion object {
+        val logger = MiraiLogger.Factory.create(this::class, "QRLoginSolver")
+    }
     override suspend fun onSolvePicCaptcha(bot: Bot, data: ByteArray): String? {
         return parentSolver.onSolvePicCaptcha(bot, data)
     }
@@ -22,11 +23,7 @@ class QRLoginSolver(
         get() = parentSolver.isSliderCaptchaSupported
 
     override fun createQRCodeLoginListener(bot: Bot): QRCodeLoginListener {
-        if (enable) {
-            return SwingQRLoginListener(this)
-        }
-
-        return parentSolver.createQRCodeLoginListener(bot)
+        return SwingQRLoginListener()
     }
 
     override suspend fun onSolveDeviceVerification(
@@ -42,5 +39,12 @@ class QRLoginSolver(
 }
 
 fun BotConfiguration.setupQRCodeLoginSolver() {
+   if (kotlin.runCatching {
+           System.getProperty("mirai.no-desktop") != null
+           || !Desktop.isDesktopSupported()
+   }.getOrElse { false }) {
+       QRLoginSolver.logger.warning("当前没有桌面环境，将使用默认登录解决器。")
+       return
+   }
     loginSolver = QRLoginSolver(loginSolver ?: StandardCharImageLoginSolver())
 }
