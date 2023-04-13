@@ -1,9 +1,11 @@
-package top.mrxiaom.qrlogin
+package top.mrxiaom.qrlogin.commands
 
 import net.mamoe.mirai.console.command.CommandSender
 import net.mamoe.mirai.console.command.CompositeCommand
 import net.mamoe.mirai.console.command.descriptor.buildCommandArgumentContext
 import net.mamoe.mirai.console.util.ConsoleExperimentalApi
+import top.mrxiaom.qrlogin.QRAutoLoginConfig
+import top.mrxiaom.qrlogin.QRLogin
 
 /**
  * https://github.com/mamoe/mirai/blob/dev/mirai-console/backend/mirai-console/src/command/BuiltInCommands.kt
