@@ -8,7 +8,7 @@ import java.awt.Desktop
 class QRLoginSolver(
     private val parentSolver: LoginSolver
 ): LoginSolver() {
-    val enable = Desktop.isDesktopSupported()
+    val enable = kotlin.runCatching { Desktop.isDesktopSupported() }.getOrElse { false }
     override suspend fun onSolvePicCaptcha(bot: Bot, data: ByteArray): String? {
         return parentSolver.onSolvePicCaptcha(bot, data)
     }
