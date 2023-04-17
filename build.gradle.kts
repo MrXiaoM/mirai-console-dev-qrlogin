@@ -4,10 +4,19 @@ plugins {
     kotlin("plugin.serialization") version kotlinVersion
 
     id("net.mamoe.mirai-console") version "2.15.0-M1"
+    id("com.github.gmazzo.buildconfig") version "3.1.0"
 }
 
 group = "top.mrxiaom"
 version = "0.1.4"
+
+buildConfig {
+    className("BuildConstants")
+    packageName("top.mrxiaom.qrlogin")
+    useKotlinOutput()
+
+    buildConfigField("String", "VERSION", "\"${project.version}\"")
+}
 
 repositories {
     maven("https://repo.huaweicloud.com/repository/maven/")

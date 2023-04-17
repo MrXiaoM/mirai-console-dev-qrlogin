@@ -14,7 +14,7 @@ object QRLogin : KotlinPlugin(
     JvmPluginDescription(
         id = "top.mrxiaom.qrlogin",
         name = "QRLogin",
-        version = "0.1.2",
+        version = BuildConstants.VERSION,
     ) {
         author("MrXiaoM")
     }
