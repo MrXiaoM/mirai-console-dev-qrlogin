@@ -46,5 +46,6 @@ fun BotConfiguration.setupQRCodeLoginSolver() {
        QRLoginSolver.logger.warning("当前没有桌面环境，将使用默认登录解决器。")
        return
    }
+    QRLoginSolver.logger.info("登录解决器更换为 QRLoginSolver")
     loginSolver = QRLoginSolver(loginSolver ?: StandardCharImageLoginSolver())
 }

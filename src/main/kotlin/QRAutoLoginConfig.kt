@@ -123,13 +123,13 @@ object QRAutoLoginConfig : AutoSavePluginConfig("AutoLogin") {
                         fileBasedDeviceInfo(device.toString())
                     }
 
-                    setupQRCodeLoginSolver()
                     mainLogger.info("Auto-login ${account.account}, protocol: ${this.protocol}, heartbeatStrategy: ${this.heartbeatStrategy}")
                 }
 
                 val bot = MiraiConsole.addBot(id, BotAuthorization.byQRCode(), BotConfiguration::configBot)
 
                 runCatching {
+                    bot.configuration.setupQRCodeLoginSolver()
                     bot.login()
                 }.onSuccess {
                     launch {

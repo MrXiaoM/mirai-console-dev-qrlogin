@@ -45,8 +45,10 @@ object QRLoginCommand : SimpleCommand(
             MiraiConsole.addBot(id, auth) {
                 this.protocol = BotConfiguration.MiraiProtocol.ANDROID_WATCH
                 setup(id, protocol)
-                setupQRCodeLoginSolver()
-            }.also { doLogin(it) }
+            }.also {
+                it.configuration.setupQRCodeLoginSolver()
+                doLogin(it)
+            }
         }.fold(
             onSuccess = { scopeWith(ConsoleCommandSender).sendMessage("${it.nick} ($id) Login successful") },
             onFailure = { throwable ->
