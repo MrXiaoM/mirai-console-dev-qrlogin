@@ -55,6 +55,11 @@ qrlogin <QQ号>
 ./gradlew buildPlugin
 ```
 
+对于想要使用 扫码登录 的 `mirai-core` 用户，请见 mirai 2.15.0-M1 的 Release Note，里面有扫码登录的操作方法。
+或者参考本插件源码：
+> 登录命令: [QRLoginCommand.kt](https://github.com/MrXiaoM/mirai-console-dev-qrlogin/blob/main/src/main/kotlin/commands/QRLoginCommand.kt#L44-L51)
+> 修改登录解决器: [QRLoginSolver.kt](https://github.com/MrXiaoM/mirai-console-dev-qrlogin/blob/main/src/main/kotlin/QRLoginSolver.kt)
+
 ## 扫码登录版本一键包下载
 
 加入群 1047497524 在群文件 `Mirai 一键包` 文件夹下载。
