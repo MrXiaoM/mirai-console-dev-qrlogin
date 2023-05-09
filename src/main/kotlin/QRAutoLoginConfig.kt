@@ -71,7 +71,7 @@ object QRAutoLoginConfig : AutoSavePluginConfig("AutoLogin") {
             Account(
                 account = "123456",
                 configuration = mapOf(
-                    Account.ConfigurationKey.protocol to "ANDRID_WATCH",
+                    Account.ConfigurationKey.protocol to "ANDROID_WATCH",
                     Account.ConfigurationKey.device to "device.json",
                     Account.ConfigurationKey.enable to true,
                     Account.ConfigurationKey.heartbeatStrategy to "STAT_HB"
