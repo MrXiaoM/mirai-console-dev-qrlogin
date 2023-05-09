@@ -58,9 +58,8 @@ class SwingQRLoginListener : QRCodeLoginListener {
         try {
             val tempFile: File
             if (tmpFile == null) {
-                tempFile = File.createTempFile(
-                    "mirai-qrcode-${bot.id}-${System.currentTimeMillis() / 1000L}",
-                    ".png"
+                tempFile = QRLogin.temp(
+                    "mirai-qrcode-${bot.id}-${System.currentTimeMillis() / 1000L}.png"
                 ).apply { deleteOnExit() }
 
                 tempFile.createNewFile()

@@ -9,6 +9,7 @@ import net.mamoe.mirai.console.util.ConsoleExperimentalApi
 import net.mamoe.mirai.console.util.SemVersion
 import top.mrxiaom.qrlogin.commands.QRAutoLoginCommand
 import top.mrxiaom.qrlogin.commands.QRLoginCommand
+import java.io.File
 import kotlin.system.exitProcess
 
 object QRLogin : KotlinPlugin(
@@ -31,9 +32,21 @@ object QRLogin : KotlinPlugin(
     @OptIn(ConsoleExperimentalApi::class)
     override fun onEnable() {
         if (!enable) return
+        cleanTempFiles()
         QRAutoLoginConfig.reload()
         QRAutoLoginConfig.runAutoLogin()
         CommandManager.registerCommand(QRLoginCommand)
         CommandManager.registerCommand(QRAutoLoginCommand)
+    }
+    override fun onDisable() {
+        cleanTempFiles()
+    }
+    fun cleanTempFiles() {
+        for (file in dataFolder.listFiles()) {
+            kotlin.runCatching { file.delete() }
+        }
+    }
+    fun temp(file: String): File {
+        return File(dataFolder, file)
     }
 }
