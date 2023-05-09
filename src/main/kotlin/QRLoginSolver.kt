@@ -40,7 +40,11 @@ class QRLoginSolver(
 }
 
 fun BotConfiguration.setupQRCodeLoginSolver() {
-   if (kotlin.runCatching {
+    if (System.getProperty("qrlogin.no-solver") != null) {
+        QRLoginSolver.logger.warning("用户已禁止本插件修改登录解决器。")
+        return
+    }
+    val isDesktopNotSupported = kotlin.runCatching {
            System.getProperty("mirai.no-desktop") != null
            || !Desktop.isDesktopSupported() }.getOrElse { false }
     if (isDesktopNotSupported) {
