@@ -27,7 +27,7 @@ qrlogin <QQ号>
 ```
 即可进行二维码登录，第一次进行二维码登录要求使用手机QQ扫码二维码确认，第二次及以后可自动使用登录会话来登录而无需扫码。建议在第一次登录后添加自动登录。
 
-**如果看不清控制台输出的二维码图片，可以在 `./data/top.mrxioam.qrlogin/` 找到二维码图片文件。**
+**如果看不清控制台输出的二维码图片，可以在 `./data/top.mrxiaom.qrlogin/` 找到二维码图片文件。**
 
 使用 `ANDROID_WATCH` 协议进行扫码登录时，需要 mirai 与你的手机处于同一网络环境，可以通过连接同一 WiFi 来实现。  
 如果你的 mirai 在服务器上，可尝试在服务器上搭建代理服务器，手机连接代理服务器再扫码。
@@ -47,7 +47,7 @@ qrlogin <QQ号>
 /qrAutoLogin setConfig <account> <configKey> <value>    # 设置一个账号(扫码登录)自动登录的一个配置项
 ```
 
-添加 jvm 参数 `-Dmirai.no-desktop` 可以禁用窗口式扫码登录处理器。
+添加 jvm 参数 `-Dmirai.no-desktop` 可以禁用窗口式扫码登录处理器。  
 添加 jvm 参数 `-Dqrlogin.no-solver` 可以禁止本插件修改登录解决器。
 
 ## 构建
@@ -57,7 +57,7 @@ qrlogin <QQ号>
 
 对于想要使用 扫码登录 的 `mirai-core` 用户，请见 mirai 2.15.0-M1 的 Release Note，里面有扫码登录的操作方法。
 或者参考本插件源码：
-> 登录命令: [QRLoginCommand.kt](https://github.com/MrXiaoM/mirai-console-dev-qrlogin/blob/main/src/main/kotlin/commands/QRLoginCommand.kt#L44-L51)
+> 登录命令: [QRLoginCommand.kt](https://github.com/MrXiaoM/mirai-console-dev-qrlogin/blob/main/src/main/kotlin/commands/QRLoginCommand.kt#L44-L51)  
 > 修改登录解决器: [QRLoginSolver.kt](https://github.com/MrXiaoM/mirai-console-dev-qrlogin/blob/main/src/main/kotlin/QRLoginSolver.kt)
 
 ## 扫码登录版本一键包下载
