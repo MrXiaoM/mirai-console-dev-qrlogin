@@ -33,6 +33,7 @@ object QRLogin : KotlinPlugin(
     }
 
     override fun PluginComponentStorage.onLoad() {
+        logger.info("Plugin version: $version")
         if (!enable) return
     }
     @OptIn(ConsoleExperimentalApi::class)
