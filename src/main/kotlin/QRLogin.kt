@@ -6,10 +6,13 @@ import net.mamoe.mirai.console.data.value
 import net.mamoe.mirai.console.extension.PluginComponentStorage
 import net.mamoe.mirai.console.plugin.jvm.JvmPluginDescription
 import net.mamoe.mirai.console.plugin.jvm.KotlinPlugin
-import net.mamoe.mirai.console.plugin.name
 import net.mamoe.mirai.console.plugin.version
 import net.mamoe.mirai.console.util.ConsoleExperimentalApi
 import net.mamoe.mirai.console.util.SemVersion
+import net.mamoe.mirai.contact.Group
+import net.mamoe.mirai.event.events.MessagePostSendEvent
+import net.mamoe.mirai.event.globalEventChannel
+import net.mamoe.mirai.utils.BotConfiguration.MiraiProtocol.ANDROID_WATCH
 import top.mrxiaom.qrlogin.commands.QRAutoLoginCommand
 import top.mrxiaom.qrlogin.commands.QRLoginCommand
 import java.io.File
@@ -44,6 +47,14 @@ object QRLogin : KotlinPlugin(
         QRAutoLoginConfig.runAutoLogin()
         CommandManager.registerCommand(QRLoginCommand)
         CommandManager.registerCommand(QRAutoLoginCommand)
+        val channel = globalEventChannel()
+        channel.subscribeAlways<MessagePostSendEvent<Group>> {
+            if (bot.configuration.protocol != ANDROID_WATCH) return@subscribeAlways
+            val ids = receipt?.source?.ids ?: IntArray(0)
+            if (ids.isEmpty() || ids.any { it < 0 }) {
+                logger.warning("群消息发送失败，你的账号可能已被风控，详见本插件帖子")
+            }
+        }
     }
     override fun onDisable() {
         cleanTempFiles()
