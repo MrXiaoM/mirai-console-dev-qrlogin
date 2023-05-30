@@ -3,7 +3,6 @@ package top.mrxiaom.qrlogin
 import net.mamoe.mirai.Bot
 import net.mamoe.mirai.auth.QRCodeLoginListener
 import net.mamoe.mirai.utils.*
-import java.awt.Desktop
 
 class QRLoginSolver(
     private val parentSolver: LoginSolver,
@@ -24,7 +23,13 @@ class QRLoginSolver(
         get() = parentSolver.isSliderCaptchaSupported
 
     override fun createQRCodeLoginListener(bot: Bot): QRCodeLoginListener {
-        return if (isDesktopSupported) SwingQRLoginListener() else RedirectQRLoginListener()
+        return if (isDesktopSupported) kotlin.runCatching {
+            SwingQRLoginListener()
+        }.onFailure {
+            logger.warning("无法初始化窗口式扫码登录监听器，将切换为CLI式扫码登录监听器。")
+        }.getOrElse {
+            RedirectQRLoginListener()
+        } else RedirectQRLoginListener()
     }
 
     override suspend fun onSolveDeviceVerification(
@@ -44,13 +49,13 @@ fun BotConfiguration.setupQRCodeLoginSolver() {
         QRLoginSolver.logger.warning("用户已禁止本插件修改登录解决器。")
         return
     }
-    val isDesktopNotSupported = kotlin.runCatching {
-           System.getProperty("mirai.no-desktop") != null
-           || !Desktop.isDesktopSupported() }.getOrElse { false }
-    if (isDesktopNotSupported) {
-       QRLoginSolver.logger.warning("当前没有桌面环境，将不使用窗口式扫码登录处理器。")
-       return
-   }
+    val isDesktopSupported = kotlin.runCatching {
+        if (System.getProperty("mirai.no-desktop") != null) false
+        else java.awt.Desktop.isDesktopSupported()
+    }.getOrElse { false }
+    if (isDesktopSupported.not()) {
+       QRLoginSolver.logger.warning("当前没有桌面环境，将不使用窗口式扫码登录监听器。")
+    }
     QRLoginSolver.logger.info("登录解决器更换为 QRLoginSolver")
-    loginSolver = QRLoginSolver(loginSolver ?: StandardCharImageLoginSolver(), !isDesktopNotSupported)
+    loginSolver = QRLoginSolver(loginSolver ?: StandardCharImageLoginSolver(), isDesktopSupported)
 }
