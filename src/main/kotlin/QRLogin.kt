@@ -3,8 +3,11 @@ package top.mrxiaom.qrlogin
 import net.mamoe.mirai.console.MiraiConsole
 import net.mamoe.mirai.console.command.*
 import net.mamoe.mirai.console.data.value
+import net.mamoe.mirai.console.extension.PluginComponentStorage
 import net.mamoe.mirai.console.plugin.jvm.JvmPluginDescription
 import net.mamoe.mirai.console.plugin.jvm.KotlinPlugin
+import net.mamoe.mirai.console.plugin.name
+import net.mamoe.mirai.console.plugin.version
 import net.mamoe.mirai.console.util.ConsoleExperimentalApi
 import net.mamoe.mirai.console.util.SemVersion
 import top.mrxiaom.qrlogin.commands.QRAutoLoginCommand
@@ -29,6 +32,9 @@ object QRLogin : KotlinPlugin(
         return@lazy true
     }
 
+    override fun PluginComponentStorage.onLoad() {
+        if (!enable) return
+    }
     @OptIn(ConsoleExperimentalApi::class)
     override fun onEnable() {
         if (!enable) return
