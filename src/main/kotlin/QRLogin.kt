@@ -2,6 +2,7 @@ package top.mrxiaom.qrlogin
 
 import net.mamoe.mirai.console.MiraiConsole
 import net.mamoe.mirai.console.command.*
+import net.mamoe.mirai.console.command.CommandManager.INSTANCE.register
 import net.mamoe.mirai.console.data.value
 import net.mamoe.mirai.console.extension.PluginComponentStorage
 import net.mamoe.mirai.console.plugin.jvm.JvmPluginDescription
@@ -13,6 +14,7 @@ import net.mamoe.mirai.contact.Group
 import net.mamoe.mirai.event.events.MessagePostSendEvent
 import net.mamoe.mirai.event.globalEventChannel
 import net.mamoe.mirai.utils.BotConfiguration.MiraiProtocol.ANDROID_WATCH
+import top.mrxiaom.qrlogin.commands.NoDesktopCommand
 import top.mrxiaom.qrlogin.commands.QRAutoLoginCommand
 import top.mrxiaom.qrlogin.commands.QRLoginCommand
 import java.io.File
@@ -45,8 +47,11 @@ object QRLogin : KotlinPlugin(
         cleanTempFiles()
         QRAutoLoginConfig.reload()
         QRAutoLoginConfig.runAutoLogin()
-        CommandManager.registerCommand(QRLoginCommand)
-        CommandManager.registerCommand(QRAutoLoginCommand)
+
+        QRLoginCommand.register()
+        QRAutoLoginCommand.register()
+        NoDesktopCommand.register()
+
         val channel = globalEventChannel()
         channel.subscribeAlways<MessagePostSendEvent<Group>> {
             if (bot.configuration.protocol != ANDROID_WATCH) return@subscribeAlways
