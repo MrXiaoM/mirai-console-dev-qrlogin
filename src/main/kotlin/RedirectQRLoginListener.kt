@@ -57,8 +57,8 @@ class RedirectQRLoginListener : QRCodeLoginListener {
             }
 
             tempFile.writeBytes(data)
-            logger.info { "[QRCodeLogin] 二维码图片如上，若看不清图片，请查看文件 ${tempFile.absolutePath}" }
-            logger.info { "[QRCodeLogin] Displaying qrcode image. If not clear, view file ${tempFile.absolutePath}." }
+            logger.info("[QRCodeLogin] 二维码图片如上，若看不清图片，请查看文件:")
+            logger.info(tempFile.absoluteFile.toPath().toUri().toString())
         } catch (e: Exception) {
             logger.warning("[QRCodeLogin] 无法写出二维码图片. 请尽量关闭终端个性化样式后扫描二维码字符图片", e)
             logger.warning(
