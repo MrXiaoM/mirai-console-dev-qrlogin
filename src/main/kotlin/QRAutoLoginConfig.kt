@@ -88,7 +88,8 @@ object QRAutoLoginConfig : AutoSavePluginConfig("AutoLogin") {
         runBlocking {
             val mainLogger = QRLogin.logger
             val accounts = accounts.filter {
-                it.configuration[Account.ConfigurationKey.enable]?.toString()?.equals("true", true) ?: true
+                (it.configuration[Account.ConfigurationKey.enable]?.toString()?.equals("true", true) ?: true)
+                        && it.account.trim() != "123456"
             }
             if (accounts.isNotEmpty()) mainLogger.info("正在进行自动登录...")
             for (account in accounts) {
@@ -97,7 +98,6 @@ object QRAutoLoginConfig : AutoSavePluginConfig("AutoLogin") {
                 }.getOrElse {
                     error("Bad auto-login account: '${account.account}'")
                 }
-                if (id == 123456L) continue
                 fun BotConfiguration.configBot() {
                     this.protocol = BotConfiguration.MiraiProtocol.ANDROID_WATCH
                     account.configuration[Account.ConfigurationKey.protocol]?.let { protocol ->
