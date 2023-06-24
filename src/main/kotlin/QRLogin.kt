@@ -38,12 +38,15 @@ object QRLogin : KotlinPlugin(
     }
 
     override fun PluginComponentStorage.onLoad() {
-        logger.info("Plugin version: $version")
+        logger.info("Loading QRLogin v$version")
         if (!enable) return
     }
     @OptIn(ConsoleExperimentalApi::class)
     override fun onEnable() {
         if (!enable) return
+        logger.info("正在启用插件 QRLogin v$version")
+        logger.info("Mirai 版本: ${MiraiConsole.version}")
+
         cleanTempFiles()
         QRAutoLoginConfig.reload()
         QRAutoLoginConfig.runAutoLogin()

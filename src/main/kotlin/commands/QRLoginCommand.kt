@@ -41,8 +41,7 @@ object QRLoginCommand : SimpleCommand(
         protocol: BotConfiguration.MiraiProtocol? = null,
     ) {
         kotlin.runCatching {
-            val auth = BotAuthorization.byQRCode()
-            MiraiConsole.addBot(id, auth) {
+            MiraiConsole.addBot(id, BotAuthorization.byQRCode()) {
                 this.protocol = BotConfiguration.MiraiProtocol.ANDROID_WATCH
                 setup(id, protocol)
             }.also {

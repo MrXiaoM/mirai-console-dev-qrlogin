@@ -87,10 +87,11 @@ object QRAutoLoginConfig : AutoSavePluginConfig("AutoLogin") {
     fun runAutoLogin() {
         runBlocking {
             val mainLogger = QRLogin.logger
-            val accounts = accounts.toList()
-            for (account in accounts.filter {
+            val accounts = accounts.filter {
                 it.configuration[Account.ConfigurationKey.enable]?.toString()?.equals("true", true) ?: true
-            }) {
+            }
+            if (accounts.isNotEmpty()) mainLogger.info("正在进行自动登录...")
+            for (account in accounts) {
                 val id = kotlin.runCatching {
                     account.account.toLong()
                 }.getOrElse {
