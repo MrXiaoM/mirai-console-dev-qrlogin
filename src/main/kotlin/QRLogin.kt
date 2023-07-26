@@ -46,6 +46,11 @@ object QRLogin : KotlinPlugin(
         if (!enable) return
         logger.info("正在启用插件 QRLogin v$version")
         logger.info("Mirai 版本: ${MiraiConsole.version}")
+        logger.warning("")
+        logger.warning("扫码登录可用状态不佳。若扫码登录无法使用，请参见以下链接部署签名服务")
+        logger.warning("@see https://wiki.mrxiaom.top/mirai/45")
+        logger.warning("@see https://mirai.mamoe.net/topic/223")
+        logger.warning("")
 
         cleanTempFiles()
         QRAutoLoginConfig.reload()

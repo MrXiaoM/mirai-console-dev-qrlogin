@@ -70,10 +70,10 @@ class SwingQRLoginListener : QRCodeLoginListener {
             }
 
             tempFile.writeBytes(data)
-            logger.info("将会在弹出窗口显示二维码图片，请在相似网络环境下使用手机QQ扫码登录。若看不清图片，请查看文件:")
-            logger.info(tempFile.absoluteFile.toPath().toUri().toString())
+            logger.info("[QRCodeLoginSwing] 将会在弹出窗口显示二维码图片，请在相似网络环境下使用手机QQ扫码登录。")
+            logger.info("[QRCodeLoginSwing] 若看不清图片，请查看文件:\n${tempFile.absoluteFile.toPath().toUri().toString()}\n")
         } catch (e: Exception) {
-            logger.warning("无法写出二维码图片.", e)
+            logger.warning("[QRCodeLoginSwing] 无法写出二维码图片.", e)
         }
     }
 
